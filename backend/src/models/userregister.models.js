@@ -1,5 +1,7 @@
 import mongoose from "mongoose";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+import e from "cors";
 
 const userRegisterSchema = new mongoose.Schema(
   {
@@ -11,11 +13,13 @@ const userRegisterSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true,
+      minlength: [6, "Email must be at least 6 characters"],
+      maxlength: [30, "Email must be at most 30 characters"],
     },
     password: {
       type: String,
       required: true,
-      match : []
+      minlength: [6, "Password must be at least 6 characters"],
     },
     phone: {
       type: String,
@@ -28,8 +32,16 @@ const userRegisterSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+userRegisterSchema.methods.generateAuthToken = async function (id) {
+  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET);
+};
 userRegisterSchema.static.hashPassowrd(async (password) => {
   return await bcrypt.hash(password, 10);
 });
+userRegisterSchema.methods.comparePassword = async (password) => {
+  return await bcrypt.compare(password, hash);
+};
 
 const userRegisterModel = mongoose.model("userLogin", userRegisterSchema);
+export default userRegisterModel;
