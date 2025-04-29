@@ -1,8 +1,8 @@
-import dotenv from "dotenv";
 import http from "http";
+import dotenv from "dotenv";
+dotenv.config();
 import db from "../db/db.js";
 import app from "./app.js";
-dotenv.config();
 
 const PORT = process.env.PORT || 8001;
 // import express app
@@ -18,6 +18,6 @@ server.listen(PORT, () => {
     console.log("Database connection failed");
   }
   console.log(`Server is running on port http://localhost:${PORT}`);
-}); 
+});
 // export default server
 export default server;
