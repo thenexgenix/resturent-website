@@ -1,25 +1,30 @@
 {
-  "name": "resturent backend",
+  "name": "backend",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./src/config/index.js"
+    "start": "nodemon server.js",
+    "dev": "nodemon ./src/config/server.js",
+    "build": "babel app.js --out-file build/server.js",
+    "build:watch": "nodemon --exec babel-node server.js --out-file build/server.js"
   },
-  "keywords": [
-    "resturent",
-    "mern",
-    "nexgenix"
-  ],
-  "author": "nexgenix ltd.",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "description": "This website is demo for nexgenix client",
+  "description": "",
   "dependencies": {
-    "bcryptjs": "^3.0.2",
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "express-validator": "^7.2.1",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.14.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
   }
 }
