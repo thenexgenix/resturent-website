@@ -1,6 +1,11 @@
+/**
+ * @file server.js
+ * @description Main server file for initializing the HTTP server, connecting to the database, and starting the application.
+ * @date 2023-10-06
+ */
+
+import "dotenv/config";
 import http from "http";
-import dotenv from "dotenv";
-dotenv.config();
 import db from "../db/db.js";
 import app from "./app.js";
 
@@ -8,14 +13,15 @@ const PORT = process.env.PORT || 8001;
 // import express app
 const server = http.createServer(app);
 
-//listern to port number
-server.listen(PORT, () => {
-  //connect the database
-  const connect = db();
-  if (connect) {
+//listen to port number
+server.listen(PORT, async () => {
+  try {
+    //connect the database
+    await db();
     console.log("Database connected successfully");
-  } else {
-    console.log("Database connection failed");
+  } catch (error) {
+    console.error("Database connection failed", error);
+    process.exit(1); // Exit the process if the database connection fails
   }
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
