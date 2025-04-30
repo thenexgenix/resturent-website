@@ -9,4 +9,4 @@ async function db() {
     process.exit(1);
   }
 }
-export default db;
+export default db;    

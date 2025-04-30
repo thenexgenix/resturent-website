@@ -1,6 +1,7 @@
 import 'dotenv/config'
 import express from "express";
 import cors from "cors";
+import foodRouter from '../Routes/food.routes';
 
 //initialize express app
 const app = express();
@@ -8,14 +9,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-//test routes
-app.post("/", (req, res) => {
-  const { name, age } = req.body;
-  if (!name || !age) {
-    return res.status(400).json({ message: "Please provide name and age" });
-  }
-  return res
-    .status(200)
-    .json({ message: `Hello ${name}, you are ${age} years old` });
-});
+// food listing routes
+app.use("/api/foods", foodRouter)
+
 export default app;
