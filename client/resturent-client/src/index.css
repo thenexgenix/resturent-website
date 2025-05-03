@@ -4,3 +4,6 @@
     font-family: "Poopins";
     src: url("./assets/font/Poppins/Poppins-Medium.ttf")format("truetype");
 }
+@theme {
+    --font-Poopins : "Poopins"
+  }
