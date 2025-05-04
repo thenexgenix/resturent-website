@@ -1,7 +1,11 @@
 import express from "express";
 import { body } from "express-validator";
-import { registerUser, loginUser, logoutUser } from "./../controllers/user.controller.js";
-import { authUserLogout } from "../middlewares/auth.user.js";
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+} from "./../controllers/user.controller.js";
+import { authUser } from "../middlewares/auth.user.js";
 //initiallize the express router
 const userRouter = express.Router();
 
@@ -34,8 +38,26 @@ userRouter.post(
   loginUser
 );
 
-
 //logout user
-userRouter.post("/logout", authUserLogout ,logoutUser)
-userRouter.post("forgetpassword",[body("email").isEmail().withMessage("Please enter a valid email")])
+userRouter.post("/logout", authUser, logoutUser);
+
+//forget password 
+userRouter.post(
+  "/forgetpassword",
+  [body("email").isEmail().withMessage("Please enter a valid email")],
+  authUser
+);
+
+//
+userRouter.post(
+  "/verifyOTP",
+  [
+    body("verifyOTP")
+      .notEmpty()
+      .withMessage("otp required")
+      .isLength({ min: 6 })
+      .withMessage("Otp must be at least 6 character long"),
+  ],
+  authUser
+);
 export default userRouter;
