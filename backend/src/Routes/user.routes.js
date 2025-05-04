@@ -37,4 +37,5 @@ userRouter.post(
 
 //logout user
 userRouter.post("/logout", authUserLogout ,logoutUser)
+userRouter.post("forgetpassword",[body("email").isEmail().withMessage("Please enter a valid email")])
 export default userRouter;
