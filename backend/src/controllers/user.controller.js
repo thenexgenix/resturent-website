@@ -156,7 +156,6 @@ export const forgetPassword = async (req, res) => {
 
     // Generate OTP and send email (implementation not shown)
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
-
     return res.status(200).json({
       success: true,
       message: "OTP sent to your email",

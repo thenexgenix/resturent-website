@@ -68,3 +68,4 @@ export const removeItems = async (req, res) => {
     });
   }
 };
+  // update the food  ites and use own authencation middleware for 
