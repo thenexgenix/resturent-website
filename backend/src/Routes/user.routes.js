@@ -1,7 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
 import { registerUser, loginUser, logoutUser } from "./../controllers/user.controller.js";
-import { authUserLogout } from "../middlewares/auth.user.js";
+import { authUser } from "../middlewares/auth.user.js";
 //initiallize the express router
 const userRouter = express.Router();
 
@@ -36,6 +36,6 @@ userRouter.post(
 
 
 //logout user
-userRouter.post("/logout", authUserLogout ,logoutUser)
-userRouter.post("forgetpassword",[body("email").isEmail().withMessage("Please enter a valid email")])
+userRouter.post("/logout", authUser ,logoutUser)
+userRouter.post("forgetpassword",[body("email").isEmail().withMessage("Please enter a valid email")],authUser,)
 export default userRouter;
