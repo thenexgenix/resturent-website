@@ -41,23 +41,27 @@ userRouter.post(
 //logout user
 userRouter.post("/logout", authUser, logoutUser);
 
-//forget password 
+//forget password
 userRouter.post(
   "/forgetpassword",
+  authUser,
   [body("email").isEmail().withMessage("Please enter a valid email")],
-  authUser
+  forgetPassword
 );
 
 //
 userRouter.post(
-  "/verifyOTP",
+  "/resetotp",
+  authUser,
   [
-    body("verifyOTP")
+    body("resetOTP")
       .notEmpty()
-      .withMessage("otp required")
+      .withMessage("OTP is required")
       .isLength({ min: 6 })
-      .withMessage("Otp must be at least 6 character long"),
+      .withMessage("OTP must be at least 6 characters long"),
   ],
-  authUser
+  resetOTP
 );
+
+//
 export default userRouter;
