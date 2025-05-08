@@ -47,7 +47,6 @@ export const authUser = async (req, res, next) => {
   }
 };
 
-
 // export const authUser = async (req, res, next) => {
 //   // Extract token from cookies or authorization header
 //   const token =

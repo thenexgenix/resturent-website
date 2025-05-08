@@ -1,6 +1,8 @@
 import { validationResult } from "express-validator";
 import UserModel from "../models/user.model.js";
 import BlacklistUser from "../models/BlacklistToken.model.js";
+import generateForgotOtpHtml from "../utils/generateForgotOtpHtml.js";
+import transporter from "../config/nodemialer.config.js";
 
 // Register User Route Handler
 export const registerUser = async (req, res) => {
@@ -134,7 +136,6 @@ export const logoutUser = async (req, res) => {
   }
 };
 
-
 //forget password route handler
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
@@ -145,8 +146,15 @@ export const forgetPassword = async (req, res) => {
       return res.status(400).json({ success: false, message: errors.array() });
     }
 
+    //check if email is same as the one in the token
+    if (email !== req.user.email) {
+      return res.status(400).json({
+        success: false,
+        message: "Email does not match",
+      });
+    }
     // Check if user exists
-    const user = await UserModel.findOne({ email });
+    const user = req.user;
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -156,6 +164,23 @@ export const forgetPassword = async (req, res) => {
 
     // Generate OTP and send email (implementation not shown)
     const otp = Math.floor(100000 + Math.random() * 900000).toString(); // Generate a 6-digit OTP
+    const otpExpireTime = Date.now() + 10 * 60 * 1000; // OTP valid for 10 minutes
+    user.resetOTP = otp;
+    user.resetOTPExpireAt = otpExpireTime;
+    await user.save();
+    console.log(
+      `OTP for ${user.email}: ${otp} (expires at ${new Date(otpExpireTime)})`
+    );
+
+    // Send OTP email
+    const mailOptions = {
+      from: process.env.SMTP_USER,
+      to: user.email,
+      subject: "Password Reset OTP",
+      html: generateForgotOtpHtml(user.email, user.name, otp),
+    };
+    await transporter.sendMail(mailOptions);
+
     return res.status(200).json({
       success: true,
       message: "OTP sent to your email",
@@ -167,4 +192,62 @@ export const forgetPassword = async (req, res) => {
       message: "Internal server error",
     });
   }
-}
+};
+
+//verify OTP route handler
+
+export const resetOTP = async (req, res) => {
+  const { resetOTP: otp } = req.body;
+  // Get user from middleware
+  const user = req.user;
+
+  // Validate request body
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, message: errors.array() });
+  }
+
+  try {
+    //  Check if a user with the OTP exists
+
+    if (!user || (user.resetOTP !== otp && otp < 6)) {
+      // Intentional delay to prevent user enumeration
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      return res.status(400).json({
+        success: false,
+        message: "Invalid OTP",
+      });
+    }
+
+    // Check if OTP is expired
+    if (Date.now() > new Date(user.resetOTPExpireAt).getTime()) {
+      // OTP is expired
+      user.resetOTP = null;
+      user.resetOTPExpireAt = null;
+      await user.save();
+      // Intentional delay to prevent user enumeration
+      await new Promise((resolve) => setTimeout(resolve, 500));
+
+      return res.status(400).json({
+        success: false,
+        message: "OTP expired",
+      });
+    }
+
+    // OTP is valid – clear the OTP and save
+    user.resetOTP = null;
+    user.resetOTPExpireAt = null;
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "OTP verified successfully",
+    });
+  } catch (error) {
+    console.error("Error verifying OTP:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
