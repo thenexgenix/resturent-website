@@ -139,6 +139,7 @@ export const logoutUser = async (req, res) => {
 //forget password route handler
 export const forgetPassword = async (req, res) => {
   const { email } = req.body;
+  const user = req.user;
   try {
     // Validate request body
     const errors = validationResult(req);
@@ -147,14 +148,19 @@ export const forgetPassword = async (req, res) => {
     }
 
     //check if email is same as the one in the token
-    if (email !== req.user.email) {
+    if (email !== user.email) {
       return res.status(400).json({
         success: false,
         message: "Email does not match",
       });
     }
+    if (user.resetOTPExpireAt > Date.now()) {
+      return res.status(400).json({
+        success: false,
+        message: "OTP already sent",
+      });
+    }
     // Check if user exists
-    const user = req.user;
     if (!user) {
       return res.status(400).json({
         success: false,
@@ -210,7 +216,7 @@ export const resetOTP = async (req, res) => {
   try {
     //  Check if a user with the OTP exists
 
-    if (!user || (user.resetOTP !== otp && otp < 6)) {
+    if (!user || (user.resetOTP !== otp && otp.length !== 6)) {
       // Intentional delay to prevent user enumeration
       await new Promise((resolve) => setTimeout(resolve, 500));
       return res.status(400).json({
@@ -245,6 +251,91 @@ export const resetOTP = async (req, res) => {
     });
   } catch (error) {
     console.error("Error verifying OTP:", error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+//update password route handler forget password
+export const updateForgetPassword = async (req, res) => {
+  const { password } = req.body;
+  // Get user from middleware
+  const user = req.user;
+
+  // Validate request body
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, message: errors.array() });
+  }
+
+  try {
+    // Check if user exists
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Hash the new password and update it in the database
+    user.password = await UserModel.hashPassword(password);
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({
+      success: false,
+      message: "Internal server error",
+    });
+  }
+};
+
+//update password route handler
+export const updatePassword = async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  // Get user from middleware
+  const user = req.user;
+
+  // Validate request body
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, message: errors.array() });
+  }
+
+  try {
+    // Check if user exists
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found",
+      });
+    }
+
+    // Verify the old password
+    const isOldPasswordValid = await UserModel.comparePassword(oldPassword);
+    if (!isOldPasswordValid) {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid old password",
+      });
+    }
+
+    // Hash the new password and update it in the database
+    user.password = await UserModel.hashPassword(newPassword);
+    await user.save();
+
+    return res.status(200).json({
+      success: true,
+      message: "Password updated successfully",
+    });
+  } catch (error) {
+    console.error(error);
     return res.status(500).json({
       success: false,
       message: "Internal server error",
