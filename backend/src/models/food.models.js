@@ -1,4 +1,5 @@
-import mongoose from "mongoose";
+import mongoose, { omitUndefined } from "mongoose";
+import jwt from "jsonwebtoken";
 
 // create a schema for food upload
 const foodSchema = new mongoose.Schema(
@@ -30,6 +31,11 @@ const foodSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+foodSchema.methods.generateAuthToken = function () {
+  return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: "7d",
+  });
+};
 // export the food model
 const FoodModel = mongoose.models.Food || mongoose.model("Food", foodSchema);
 export default FoodModel;
