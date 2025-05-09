@@ -11,7 +11,6 @@ const createUser = async ({ name, email, password }) => {
       email,
       password: hashPassword,
     });
-
     return registerUserData;
   } catch (error) {
     throw new error(error.massage);

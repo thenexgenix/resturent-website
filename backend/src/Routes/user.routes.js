@@ -5,6 +5,8 @@ import {
   loginUser,
   logoutUser,
   updatePassword,
+  OTP,
+  updateForgetPassword,
 } from "./../controllers/user.controller.js";
 import { authUser } from "../middlewares/auth.user.js";
 //initiallize the express router
@@ -61,12 +63,26 @@ userRouter.post(
       .isLength({ min: 6 })
       .withMessage("OTP must be at least 6 characters long"),
   ],
-  resetOTP
+  OTP
+);
+
+//update forgot password
+userRouter.post(
+  "/updateForgetPass",
+  authUser,
+  [
+    body("Password")
+      .notEmpty()
+      .withMessage("New password is required")
+      .isLength({ min: 6 })
+      .withMessage("New password must be at least 6 characters long"),
+  ],
+  updateForgetPassword
 );
 
 //update password
 userRouter.post(
-  "/updatepassword",
+  "/updatepassword" ,
   authUser,
   [
     body("oldPassword")

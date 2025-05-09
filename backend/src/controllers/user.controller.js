@@ -3,6 +3,7 @@ import UserModel from "../models/user.model.js";
 import BlacklistUser from "../models/BlacklistToken.model.js";
 import generateForgotOtpHtml from "../utils/generateForgotOtpHtml.js";
 import transporter from "../config/nodemialer.config.js";
+import { promises } from "nodemailer/lib/xoauth2/index.js";
 
 // Register User Route Handler
 export const registerUser = async (req, res) => {
@@ -202,7 +203,7 @@ export const forgetPassword = async (req, res) => {
 
 //verify OTP route handler
 
-export const resetOTP = async (req, res) => {
+export const OTP = async (req, res) => {
   const { resetOTP: otp } = req.body;
   // Get user from middleware
   const user = req.user;
@@ -278,7 +279,14 @@ export const updateForgetPassword = async (req, res) => {
         message: "User not found",
       });
     }
-
+    // Check if user has a reset OTP and if it has expired
+    if (user.resetOTP === null && user.resetOTPExpireAt === null) {
+      await new promises((resolve) => setTimeout(resolve, 500));
+      return res.status(400).json({
+        success: false,
+        message: "Please verify your OTP first",
+      });
+    }
     // Hash the new password and update it in the database
     user.password = await UserModel.hashPassword(password);
     await user.save();
