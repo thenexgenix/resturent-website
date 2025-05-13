@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
+import ExploreMenu from "./../components/ui/home/ExploreMenu";
+import useFoods from "../hooks/useFoods";
 
 const Home = () => {
+  const { foods, setCategory, category, error, filteredFoods, isLoading } =
+    useFoods();
+  const [currentIndex, setCurrentIndex] = useState(0);
   const heroImages = [
     {
       id: 1,
@@ -29,8 +34,6 @@ const Home = () => {
     },
   ];
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % heroImages.length);
@@ -40,17 +43,19 @@ const Home = () => {
   }, [heroImages.length]);
 
   return (
-    <main className="w-full mt-20">
-      <section className="relative overflow-hidden w-full h-[40vh] md:h-[70vh]">
+    <main className="w-full mt-20 ">
+      {/* hero section */}
+      <section className="md:container mx-auto md:rounded-3xl relative overflow-hidden w-full h-[40vh] md:h-[70vh]">
         {heroImages.map((image, index) => (
           <div
             key={image.id}
-            className="absolute top-0 left-0 w-full h-full transition-opacity duration-1000"
+            className="absolute  top-0 left-0 w-full h-full transition-opacity duration-1000"
             style={{
               backgroundImage: `url(${image.url})`,
               backgroundSize: "cover",
               backgroundPosition: "center",
               opacity: index === currentIndex ? 1 : 0,
+              backgroundAttachment: "fixed",
             }}
           >
             {index === currentIndex && (
@@ -95,6 +100,11 @@ const Home = () => {
             )}
           </div>
         ))}
+      </section>
+
+      {/* explore item menu */}
+      <section>
+        <ExploreMenu category={category} setCategory={setCategory} />
       </section>
     </main>
   );

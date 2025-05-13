@@ -27,7 +27,7 @@ const Cursor = () => {
   return (
     <>
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 hidden md:block"
+        className="fixed top-0 left-0 pointer-events-none z-[999] hidden md:block"
         style={{
           width: "30px",
           height: "30px",

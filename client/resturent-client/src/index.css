@@ -1,15 +1,16 @@
 @import "tailwindcss";
 
 @font-face {
-    font-family: "Poopins";
-    src: url("./assets/font/Poppins/Poppins-Medium.ttf")format("truetype");
+  font-family: "Poopins";
+  src: url("./assets/font/Poppins/Poppins-Medium.ttf")format("truetype");
 }
-@theme {
-    --font-Poopins : "Poopins"
-    --color-bg-primary: #DC1D23;
-  }
 
-  ::selection {
-    background-color: #DC1D23;
-    color: white;
-  }
+@theme {
+  --font-Poopins: "Poopins", sans-serif;
+  --color-bg-primary: #DC1D23;
+}
+
+::selection {
+  background-color: #DC1D23;
+  color: white;
+}

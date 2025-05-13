@@ -30,7 +30,7 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={menuVariants}
-      className=" md:hidden fixed top-0 right-0 h-screen w-[75%] md:w-[50%] bg-white shadow-lg py-6 px-8 flex flex-col z-50"
+      className=" md:hidden fixed  top-0 right-0 h-screen w-[75%] md:w-[50%]  bg-white shadow-lg py-6 px-8 flex flex-col z-[800]"
     >
       <div className="flex justify-end items-center mb-8">
         <button
@@ -38,7 +38,7 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
           className="text-navbar-text hover:text-navbar-hover transition-colors hover:bg-gray-200 rounded-4xl p-2"
           aria-label="Close menu"
         >
-          <RiCloseLine  size={24} weight="bold" />
+          <RiCloseLine size={24} weight="bold" />
         </button>
       </div>
 

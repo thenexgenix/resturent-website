@@ -47,7 +47,7 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-40 ${
+        className={`fixed top-0 left-0 right-0 z-[100] ${
           scrolled ? "shadow-md bg-white" : "bg-white bg-opacity-95"
         } transition-all duration-300`}
       >
@@ -57,7 +57,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden  md:flex items-center md:gap-6 lg:gap-10 text-medium lg:text-xl font-semibold">
+          <nav className="hidden  md:flex items-center md:gap-6 lg:gap-10 text-medium lg:text-xl ">
             <Link
               to="/"
               className="text-navbar-text hover:text-navbar-hover  transition-colors relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-navbar-hover after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:origin-left"
