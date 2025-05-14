@@ -6,6 +6,7 @@ import useFoods from "../hooks/useFoods";
 const Home = () => {
   const { foods, setCategory, category, error, filteredFoods, isLoading } =
     useFoods();
+    
   const [currentIndex, setCurrentIndex] = useState(0);
   const heroImages = [
     {

@@ -30,7 +30,7 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={menuVariants}
-      className=" md:hidden fixed  top-0 right-0 h-screen w-[75%] md:w-[50%]  bg-white shadow-lg py-6 px-8 flex flex-col z-[800]"
+      className=" md:hidden fixed  top-0 right-0 h-screen w-full  bg-white shadow-lg py-6 px-8 flex flex-col z-[800]"
     >
       <div className="flex justify-end items-center mb-8">
         <button
