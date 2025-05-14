@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
-import { motion } from "motion/react"; 
+import { motion } from "motion/react";
 import { useState } from "react";
 import { menu_list } from "../../../assets/frontend_assets/assets";
 
-const ExploreMenu = ({  setCategory }) => {
+const ExploreMenu = ({ category, setCategory }) => {
   const handleCategory = (categoryName) => {
     setCategory(categoryName);
   };
@@ -47,7 +47,7 @@ const ExploreMenu = ({  setCategory }) => {
             responsive={{
               desktop: {
                 breakpoint: { max: 3000, min: 1024 },
-                items: 5,
+                items: 6,
                 partialVisibilityGutter: 40,
               },
               mobile: {
@@ -60,6 +60,11 @@ const ExploreMenu = ({  setCategory }) => {
                 items: 2,
                 partialVisibilityGutter: 30,
               },
+              superLargeDesktop: {
+                breakpoint: { max: 4000, min: 3000 },
+                items: 8,
+                partialVisibilityGutter: 40,
+              },
             }}
             showDots={false}
             slidesToSlide={2}
@@ -68,14 +73,27 @@ const ExploreMenu = ({  setCategory }) => {
             {menu_list?.map((items, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center p-4"
-                onClick={() => handleCategory(items.menu_name)}
+                className={`flex flex-col items-center justify-center p-4 `}
+                onClick={() =>
+                  handleCategory((prev) =>
+                    prev === items.menu_name ? "All" : items.menu_name
+                  )
+                }
               >
-                <img
+                <motion.img
                   src={items.menu_image}
                   alt={items.menu_name}
-                  className="mb-4 w-40 h-40 rounded-full object-cover"
+                  whileHover={{
+                    boxShadow: "0px 4px 15px rgba(0,0,0,0.2)",
+                  }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className={` overflow-hidden mb-4 w-40 h-40 rounded-full object-cover cursor-pointer ${
+                    category === items.menu_name
+                      ? "border-4 border-bg-primary"
+                      : ""
+                  }`}
                 />
+                <p>{items.menu_name}</p>
               </div>
             ))}
           </Carousel>
