@@ -3,7 +3,6 @@ import UserModel from "../models/user.model.js";
 import BlacklistUser from "../models/BlacklistToken.model.js";
 import generateForgotOtpHtml from "../utils/generateForgotOtpHtml.js";
 import transporter from "../config/nodemialer.config.js";
-import { promises } from "nodemailer/lib/xoauth2/index.js";
 
 // Register User Route Handler
 export const registerUser = async (req, res) => {
@@ -28,7 +27,7 @@ export const registerUser = async (req, res) => {
     // Create new user
     const newUser = await UserModel.create({ name, email, password });
 
-    // Generate auth token
+    // Generate auth token 
     const authToken = newUser.generateAuthToken();
 
     // Set auth token in header and cookie
@@ -56,6 +55,17 @@ export const registerUser = async (req, res) => {
 
 // login User Route Handlers
 export const loginUser = async (req, res) => {
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ success: false, message: errors.array() });
+  }
+  // Check if user is already logged in
+  if (req.user) {
+    return res.status(400).json({
+      success: false,
+      message: "User already logged in",
+    });
+  }
   try {
     const { email, password } = req.body;
 
@@ -66,7 +76,7 @@ export const loginUser = async (req, res) => {
       });
     }
     //find the user
-    const user = await UserModel.findOne({ email });
+    const user = await UserModel.findOne({ email }).select("password");
     if (!user) {
       // Intentional delay to prevent user enumeration
       await new Promise((resolve) => setTimeout(resolve, 500));

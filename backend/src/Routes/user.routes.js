@@ -7,6 +7,7 @@ import {
   updatePassword,
   OTP,
   updateForgetPassword,
+  forgetPassword,
 } from "./../controllers/user.controller.js";
 import { authUser } from "../middlewares/auth.user.js";
 //initiallize the express router
@@ -32,6 +33,7 @@ userRouter.post(
 //login user
 userRouter.post(
   "/login",
+  authUser,
   [
     body("email").isEmail().withMessage("Please enter a valid email"),
     body("password")
@@ -82,7 +84,7 @@ userRouter.post(
 
 //update password
 userRouter.post(
-  "/updatepassword" ,
+  "/updatepassword",
   authUser,
   [
     body("oldPassword")

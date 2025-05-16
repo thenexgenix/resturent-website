@@ -1,7 +1,11 @@
 import express from "express";
 import multer from "multer";
 import { body } from "express-validator";
-import { addFood, listFood, removeItems } from "../controllers/food.controller.js";
+import {
+  addFood,
+  listFood,
+  removeItems,
+} from "../controllers/food.controller.js";
 import path from "path";
 import fs from "fs";
 
@@ -71,7 +75,7 @@ foodRouter.post(
   addFood
 );
 //food router for list all the  food
-foodRouter.get("/listitem", listFood)
+foodRouter.get("/listitem", listFood);
 //rood router for remove food items
-foodRouter.post("/remove/one", removeItems)
+foodRouter.post("/remove/one", removeItems);
 export default foodRouter;

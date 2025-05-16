@@ -24,7 +24,6 @@ const userSchema = new mongoose.Schema(
       minlength: [6, "Password should be at least 6 characters long"],
       select: false,
     },
-
     // Email verification fields
     verifyOTP: {
       type: String,
@@ -63,7 +62,7 @@ userSchema.methods.comparePassword = async function (password) {
 };
 
 // Generate auth token
-userSchema.methods.generateAuthToken = function () {
+userSchema.methods.generateAuthToken = async function () {
   return jwt.sign({ _id: this._id }, process.env.JWT_SECRET, {
     expiresIn: "7d",
   });

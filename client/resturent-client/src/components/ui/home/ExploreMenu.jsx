@@ -1,17 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { motion } from "motion/react";
-import { useState } from "react";
 import { menu_list } from "../../../assets/frontend_assets/assets";
+import useFoodAndCartStore from "../../../hooks/useFoodAndCartStore";
+import useFoods from "../../../hooks/useFoods";
+import { useEffect } from "react";
 
-const ExploreMenu = ({ category, setCategory }) => {
+const ExploreMenu = () => {
+  // tanstack query data
+  // This hook fetches the food data from the server and manages loading and error states.
+  const { data } = useFoods();
+  // Zustand store
+  // This store manages the food data, cart items, and selected category for filtering.
+  const { selectedCategory, setSelectedCategory, setFoodData } =
+    useFoodAndCartStore();
   const handleCategory = (categoryName) => {
-    setCategory(categoryName);
+    if (selectedCategory === categoryName) {
+      setSelectedCategory("all");
+    } else {
+      setSelectedCategory(categoryName);
+    }
   };
+  // when data comes, push it into Zustand
+  useEffect(() => {
+    if (data) {
+      setFoodData(data);
+    } else {
+      setFoodData([]);
+    }
+  }, [data, setFoodData]);
   return (
     <>
-      <div className="container mx-auto mt-20 px-4">
+      <div className=" mx-auto mt-20 px-4">
         <section className=" flex flex-col items-start justify-start  mb-8">
           <motion.div
             className="max-w-3xl mb-8 text-start"
@@ -74,11 +95,7 @@ const ExploreMenu = ({ category, setCategory }) => {
               <div
                 key={index}
                 className={`flex flex-col items-center justify-center p-4 `}
-                onClick={() =>
-                  handleCategory((prev) =>
-                    prev === items.menu_name ? "All" : items.menu_name
-                  )
-                }
+                onClick={() => handleCategory(items.menu_name)}
               >
                 <motion.img
                   src={items.menu_image}
@@ -88,7 +105,7 @@ const ExploreMenu = ({ category, setCategory }) => {
                   }}
                   transition={{ type: "spring", stiffness: 300 }}
                   className={` overflow-hidden mb-4 w-40 h-40 rounded-full object-cover cursor-pointer ${
-                    category === items.menu_name
+                    selectedCategory === items.menu_name
                       ? "border-4 border-bg-primary"
                       : ""
                   }`}
