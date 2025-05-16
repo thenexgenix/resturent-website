@@ -53,7 +53,8 @@ const Navbar = () => {
       >
         <div className="container mx-auto px-4 md:px-0 py-4 flex items-center justify-between ">
           <Link to="/" className="flex-shrink-0">
-            <img src={assets.logo} alt="" />
+            {/* <img src={assets.logo} alt="" /> */}
+            <h2 className="text-4xl text-bg-primary font-bold ">QuickBite</h2>
           </Link>
 
           {/* Desktop Navigation */}
@@ -99,7 +100,7 @@ const Navbar = () => {
               <FaCartArrowDown size={20} weight="bold" />
             </button>
             <Link to="/login">
-              <button className="border bg-[#FF4C24] hover:bg-[#ff4c24e7] active:scale-95 transition-all ease-linear text-white  hover:bg-opacity-90  font-medium py-2 px-4 rounded  duration-150">
+              <button className="border bg-bg-primary hover:bg-[#ff4c24e7] active:scale-95 transition-all ease-linear text-white  hover:bg-opacity-90  font-medium py-2 px-4 rounded  duration-150">
                 Login
               </button>
             </Link>

@@ -8,7 +8,7 @@ export const addFood = async (req, res) => {
   try {
     const error = validationResult(req);
     if (!error.isEmpty()) {
-      return res.status(400).json({ success: false, massage : error.array() });
+      return res.status(400).json({ success: false, massage: error.array() });
     }
     const { name, description, price, image, category } = req.body;
     // create new food document
@@ -68,4 +68,4 @@ export const removeItems = async (req, res) => {
     });
   }
 };
-  // update the food  ites and use own authencation middleware for 
+// update the food  ites and use own authencation middleware for

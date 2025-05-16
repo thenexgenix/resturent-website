@@ -1,4 +1,4 @@
-import mongoose, { omitUndefined } from "mongoose";
+import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
 
 // create a schema for food upload
@@ -26,6 +26,20 @@ const foodSchema = new mongoose.Schema(
     category: {
       type: String,
       required: true,
+      enum: [
+        "Salad",
+        "Rolls",
+        "Deserts",
+        "Sandwich",
+        "Cake",
+        "Pure Veg",
+        "Pasta",
+        "Noodles",
+      ],
+    },
+    starRating: {
+      type: Number,
+      default: 0,
     },
   },
   { timestamps: true }

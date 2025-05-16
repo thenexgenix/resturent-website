@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create an instance of axiox with  a base URL
 const foodApi = axios.create({
-  baseURL: "http://localhost:8000/api/v1/",
+  baseURL: "http://localhost:8000/api/v1",
   headers: {
     "Content-Type": "application/json",
     Accept: "application/json",
@@ -10,6 +10,6 @@ const foodApi = axios.create({
 });
 //all foods items
 export const getAllFoods = async () => {
-  const {data} = await foodApi.get("/listitem");
-  return data;
+  const response = await foodApi.get("/foods/listitem");
+  return response.data.data;
 };

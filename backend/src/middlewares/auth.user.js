@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
-import UserModel from "../models/user.model";
-import BlacklistUser from "../models/BlacklistToken.model";
+import UserModel from "../models/user.model.js";
+import BlacklistUser from "../models/BlacklistToken.model.js";
 
 export const authUser = async (req, res, next) => {
   // Extract token from cookies or authorization header

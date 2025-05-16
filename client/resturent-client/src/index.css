@@ -7,10 +7,10 @@
 
 @theme {
   --font-Poopins: "Poopins", sans-serif;
-  --color-bg-primary: #DC1D23;
+  --color-bg-primary: #F90806;
 }
 
 ::selection {
-  background-color: #DC1D23;
+  background-color: #F90806;
   color: white;
 }
