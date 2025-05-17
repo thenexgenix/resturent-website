@@ -110,7 +110,7 @@ const ExploreMenu = () => {
                       : ""
                   }`}
                 />
-                <p>{items.menu_name}</p>
+                <p className="font-semibold">{items.menu_name}</p>
               </div>
             ))}
           </Carousel>
