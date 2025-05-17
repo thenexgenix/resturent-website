@@ -5,6 +5,8 @@ import Home from "../pages/Home";
 import Cart from "../pages/Cart";
 import Orderpage from "../pages/Orderpage";
 import Loader from "../components/Loader";
+import Login from './../pages/Login';
+import Register from "../pages/Register";
 
 const Routers = () => {
   const [ispageLoading, setIsPageLoading] = useState(true);
@@ -26,6 +28,11 @@ const Routers = () => {
           <Route path="/contact" element={<h1>Contact Page</h1>} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/place-order" element={<Orderpage />} />
+
+          {/* <Route path="/order/:id" element={<Orderpage />} /> */}
+          {/* login and register routes */}
+          <Route path="/login" element={<Login/>} />
+          <Route path="/register" element={<Register/>} />
           <Route path="*" element={<h1>404 Not Found</h1>} />
         </Route>
       </Routes>

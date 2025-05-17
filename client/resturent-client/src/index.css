@@ -2,12 +2,14 @@
 
 @font-face {
   font-family: "Poopins";
-  src: url("./assets/font/Poppins/Poppins-Medium.ttf")format("truetype");
+  src: url("./assets/font/Belleza-Regular.ttf")format("truetype");
 }
 
 @theme {
-  --font-Poopins: "Poopins", sans-serif;
+  --font-Poopins: "Belleza", sans-serif;
   --color-bg-primary: #F90806;
+  --color-bg-footer : #1E1E1E;
+  --color-footer-text: #FFFFFF;
 }
 
 ::selection {
