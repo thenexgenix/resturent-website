@@ -39,6 +39,7 @@ export const listFood = async (req, res) => {
         message: "No food items found",
       });
     }
+    
     return res.status(200).json({
       success: true,
       data: fooditemlist,

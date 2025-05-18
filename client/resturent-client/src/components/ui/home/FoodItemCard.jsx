@@ -27,7 +27,7 @@ const FoodItemCard = ({ item }) => {
       addToCart({ ...item, quantity: quantitys });
     }
   };
-  console.log(cartItems);
+
 
   return (
     <motion.div
@@ -41,6 +41,7 @@ const FoodItemCard = ({ item }) => {
         src={`http://localhost:8000/images/${item.image}`}
         alt={item.name}
         className="h-40 w-full object-cover rounded-t-xl"
+        loading="lazy"
       />
 
       <div className="p-4 flex flex-col flex-grow">
