@@ -27,7 +27,7 @@ export const registerUser = async (req, res) => {
     // Create new user
     const newUser = await UserModel.create({ name, email, password });
 
-    // Generate auth token 
+    // Generate auth token
     const authToken = newUser.generateAuthToken();
 
     // Set auth token in header and cookie
@@ -41,6 +41,7 @@ export const registerUser = async (req, res) => {
 
     // Return success response
     return res.status(201).json({
+      token: authToken,
       success: true,
       message: "User registered successfully",
     });

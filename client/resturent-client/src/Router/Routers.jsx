@@ -9,15 +9,15 @@ import Login from './../pages/Login';
 import Register from "../pages/Register";
 
 const Routers = () => {
-  const [ispageLoading, setIsPageLoading] = useState(true);
+  // const [ispageLoading, setIsPageLoading] = useState(true);
 
-  if (ispageLoading)
-    return (
-      <Loader
-        ispageLoading={ispageLoading}
-        setIsPageLoading={setIsPageLoading}
-      />
-    );
+  // if (ispageLoading)
+  //   return (
+  //     <Loader
+  //       ispageLoading={ispageLoading}
+  //       setIsPageLoading={setIsPageLoading}
+  //     />
+  //   );
 
   return (
     <BrowserRouter>

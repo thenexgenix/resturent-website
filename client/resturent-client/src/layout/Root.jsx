@@ -7,7 +7,7 @@ import Footer from "../components/Footer";
 const Root = () => {
   return (
     <>
-      <main className="font-Belleza">
+      <main className="font-Belleza overflow-hidden">
         <Cursor />
         <Navbar />
         <Outlet />
