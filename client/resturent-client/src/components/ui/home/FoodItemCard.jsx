@@ -15,35 +15,43 @@ const FoodItemCard = ({ item }) => {
 
   // Add to cart with current quantity
   const handleAddToCart = () => {
-    if (quantitys === 0) return; // Prevent adding if quantity is 0
+    if (quantitys === 0) return;
     const existingItem = cartItems.find(
       (cartItem) => cartItem._id === item._id
     );
     if (existingItem) {
-      // If item exists, update its quantity
       addToCart({ ...item, quantity: existingItem.quantity + quantitys });
     } else {
-      // If item does not exist, add as new
       addToCart({ ...item, quantity: quantitys });
     }
   };
-
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      whileHover={{ scale: 1.03 }}
+      whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.3 }}
-      className="w-64 bg-white rounded-xl shadow-lg overflow-hidden flex flex-col"
+      className="w-full bg-white rounded-xl shadow-lg overflow-hidden flex flex-col"
     >
-      <img
-        src={`http://localhost:8000/images/${item.image}`}
-        alt={item.name}
-        className="h-40 w-full object-cover rounded-t-xl"
-        loading="lazy"
-      />
+      {/* Image Section */}
+      <div className="relative overflow-hidden group h-52 w-full">
+        {/* Yellow Background on Hover */}
+        <motion.div
+          className="absolute inset-0 bg-yellow-100 z-0"
+          initial={{ opacity: 0 }}
+          whileHover={{ opacity: 1 }}
+          transition={{ duration: 0.3 }}
+        />
+        {/* Scalable Image */}
+        <motion.img
+          src={`http://localhost:8000/images/${item.image}`}
+          alt={item.name}
+          className="h-full w-full object-cover z-10 relative transition-transform duration-300 ease-in-out group-hover:scale-110"
+        />
+      </div>
 
+      {/* Content Section */}
       <div className="p-4 flex flex-col flex-grow">
         <h3 className="text-lg font-semibold">{item.name}</h3>
 
@@ -64,7 +72,7 @@ const FoodItemCard = ({ item }) => {
         <p className="text-sm text-gray-600 flex-grow">{item.description}</p>
 
         <div className="flex items-center justify-between mt-4">
-          <span className="text-xl font-bold text-red-600">${item.price}</span>
+          <span className="text-xl font-bold text-red-600">৳{item.price}</span>
 
           <div className="flex items-center bg-gray-100 rounded-full px-3 py-1 space-x-2">
             <button
