@@ -24,11 +24,11 @@ const Login = () => {
       const res = await LoginUser({ email, password });
       const token = res.data.token;
 
-      // Store token in sessionStorage instead of localStorage (you prefer session)
+      // Store token in sessionStorage instead 
       sessionStorage.setItem("token", token);
 
       toast.success("Login successful!");
-      navigate("/dashboard"); // redirect after login
+      // navigate("/dashboard"); // redirect after login
     } catch (err) {
       toast.error(err.response?.data?.message || "Login failed!");
     } finally {
@@ -76,7 +76,9 @@ const Login = () => {
             transition={{ duration: 0.5 }}
             className="text-start"
           >
-            <h2 className="text-3xl md:text-5xl text-bg-primary font-bold mb-6 md:mb-8">Login</h2>
+            <h2 className="text-3xl md:text-5xl text-bg-primary font-bold mb-6 md:mb-8">
+              Login
+            </h2>
             <p className="text-gray-600 mt-2">
               Welcome back! Please enter your details to continue.
             </p>

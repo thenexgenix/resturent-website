@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { registerUser } from '../api/user.api';
-import toast, { Toaster } from 'react-hot-toast';
-import { useNavigate, Link } from 'react-router';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from "react";
+import { registerUser } from "../api/user.api";
+import toast, { Toaster } from "react-hot-toast";
+import { useNavigate, Link } from "react-router";
+import { motion } from "framer-motion";
 
 const inputVariants = {
   hidden: { opacity: 0, y: 20 },
@@ -14,27 +14,27 @@ const inputVariants = {
 };
 
 const buttonVariants = {
-  hover: { scale: 1.05, backgroundColor: '#D00706' },
+  hover: { scale: 1.05, backgroundColor: "#D00706" },
   tap: { scale: 0.95 },
 };
 
 const overlayVariants = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [agreeTerms, setAgreeTerms] = useState(false);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = sessionStorage.getItem('authToken');
+    const token = sessionStorage.getItem("authToken");
     if (token) {
-      navigate('/dashboard');
+      navigate("/");
     }
   }, [navigate]);
 
@@ -42,7 +42,7 @@ const Register = () => {
     e.preventDefault();
 
     if (!name || !email || !password || !agreeTerms) {
-      toast.error('Please fill all fields and accept terms.');
+      toast.error("Please fill all fields and accept terms.");
       return;
     }
 
@@ -51,12 +51,12 @@ const Register = () => {
       const res = await registerUser({ name, email, password });
       const token = res.data.token;
 
-      sessionStorage.setItem('authToken', token);
+      sessionStorage.setItem("authToken", token);
 
-      toast.success('Registration successful! Redirecting...');
-      navigate('/dashboard');
+      toast.success("Registration successful! Redirecting...");
+      navigate("/");
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Registration failed!');
+      toast.error(err.response?.data?.message || "Registration failed!");
     } finally {
       setLoading(false);
     }
@@ -134,7 +134,7 @@ const Register = () => {
               className="w-5 h-5"
             />
             <label className="text-sm text-gray-700">
-              I agree to the{' '}
+              I agree to the{" "}
               <Link to="/terms" className="text-[#F90806] underline">
                 Terms and Conditions
               </Link>
@@ -150,7 +150,7 @@ const Register = () => {
             whileTap="tap"
             custom={4}
           >
-            {loading ? 'Registering...' : 'Register'}
+            {loading ? "Registering..." : "Register"}
           </motion.button>
         </motion.form>
 
@@ -160,7 +160,7 @@ const Register = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.7, duration: 0.6 }}
         >
-          Already have an account?{' '}
+          Already have an account?{" "}
           <Link to="/login" className="text-[#F90806] underline">
             Login here
           </Link>
@@ -172,8 +172,8 @@ const Register = () => {
         className="hidden md:flex md:w-1/2 bg-cover bg-center relative"
         style={{
           backgroundImage:
-            "url('https://plus.unsplash.com/premium_vector-1734602135837-32b52d2d6eea?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
-          minHeight: '100vh',
+            "url('https://images.unsplash.com/vector-1740699300565-b48b64151431?q=80&w=2360&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+          minHeight: "100vh",
         }}
       >
         <motion.div
@@ -183,7 +183,10 @@ const Register = () => {
           variants={overlayVariants}
         >
           <h2 className="text-4xl font-bold mb-3">Welcome Back!</h2>
-          <p>Create your account to access exclusive features and start exploring.</p>
+          <p>
+            Create your account to access exclusive features and start
+            exploring.
+          </p>
         </motion.div>
       </div>
     </div>
