@@ -33,7 +33,7 @@ const ExploreMenu = () => {
   return (
     <>
       <div className=" mx-auto mt-20 px-4">
-        <section className=" flex flex-col items-start justify-start  mb-8">
+        <section className=" italic flex flex-col items-start justify-start  mb-8">
           <motion.div
             className="max-w-3xl mb-8 text-start"
             initial={{ opacity: 0, y: 50 }}
@@ -41,7 +41,7 @@ const ExploreMenu = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
             viewport={{ once: true }}
           >
-            <h1 className="text-4xl lg:text-5xl xl:text-7xl font-bold mb-4">
+            <h1 className="text-4xl  lg:text-5xl xl:text-7xl font-bold mb-4">
               Explore Our Menu
             </h1>
             <p className=" text-base md:text-lg xl:text-xl leading-relaxed">

@@ -13,3 +13,9 @@ export const getAllFoods = async () => {
   const response = await foodApi.get("/foods/listitem");
   return response.data.data;
 };
+
+// Get food item by ID
+export const getFoodById = async (id) => {
+  const response = await foodApi.get(`/foods/${id}`);
+  return response.data;
+};
