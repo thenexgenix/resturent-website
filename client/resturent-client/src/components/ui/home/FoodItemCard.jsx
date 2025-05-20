@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { Link, useParams } from "react-router";
 import { motion } from "framer-motion";
 import { FaStar, FaShoppingCart } from "react-icons/fa";
 import { FiMinus, FiPlus } from "react-icons/fi";
 import useFoodAndCartStore from "../../../hooks/useFoodAndCartStore";
 
 const FoodItemCard = ({ item }) => {
-  const { addToCart, cartItems } = useFoodAndCartStore();
   const [quantitys, setQuantitys] = useState(0);
   const [hovered, setHovered] = useState(false);
+
+  const { addToCart, cartItems } = useFoodAndCartStore();
 
   // Increment and decrement quantity
   const increment = () => setQuantitys((q) => q + 1);
@@ -53,7 +55,13 @@ const FoodItemCard = ({ item }) => {
 
       {/* Content Section */}
       <div className="p-4 flex flex-col flex-grow">
-        <h3 className="text-lg font-semibold">{item.name}</h3>
+        <Link
+         
+          to={`/menu/${item._id}`}
+          className="text-gray-800"
+        >
+          <h3 className="text-lg font-semibold">{item.name}</h3>
+        </Link>
 
         <div className="flex items-center mt-1 mb-2">
           {[...Array(5)].map((_, i) => (

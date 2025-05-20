@@ -89,7 +89,7 @@ const HeroSlider = ({ images, autoSlide = true, intervalTime = 4000 }) => {
 
                   {isActive && currentIndex === 0 ? (
                     <motion.h1
-                      className="text-4xl md:text-6xl lg:text-9xl tracking-tight leading-tight"
+                      className="text-4xl md:text-6xl italic lg:text-9xl tracking-tight leading-tight"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.8, ease: "easeOut" }}
@@ -97,14 +97,14 @@ const HeroSlider = ({ images, autoSlide = true, intervalTime = 4000 }) => {
                       {image.heading}
                     </motion.h1>
                   ) : (
-                    <h1 className="text-4xl md:text-6xl lg:text-9xl tracking-tight leading-tight">
+                    <h1 className="text-4xl italic md:text-6xl lg:text-9xl tracking-tight leading-tight">
                       {image.heading}
                     </h1>
                   )}
                 </div>
 
                 {/* Highlight text */}
-                <div className="mb-8 relative inline-block">
+                <div className="mb-8 relative inline-block italic">
                   {isActive && currentIndex === 0 ? (
                     <motion.p
                       className="text-lg md:text-2xl mb-2 max-w-2xl leading-relaxed"
