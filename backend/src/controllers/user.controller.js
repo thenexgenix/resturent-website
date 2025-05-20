@@ -3,6 +3,7 @@ import UserModel from "../models/user.model.js";
 import BlacklistUser from "../models/BlacklistToken.model.js";
 import generateForgotOtpHtml from "../utils/generateForgotOtpHtml.js";
 import transporter from "../config/nodemialer.config.js";
+import createUser from "../services/user.service.js";
 
 // Register User Route Handler
 export const registerUser = async (req, res) => {
@@ -25,7 +26,7 @@ export const registerUser = async (req, res) => {
     }
 
     // Create new user
-    const newUser = await UserModel.create({ name, email, password });
+    const newUser = await createUser({ name, email, password });
 
     // Generate auth token
     const authToken = newUser.generateAuthToken();

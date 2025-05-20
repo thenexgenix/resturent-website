@@ -39,7 +39,7 @@ export const listFood = async (req, res) => {
         message: "No food items found",
       });
     }
-    
+
     return res.status(200).json({
       success: true,
       data: fooditemlist,
@@ -52,6 +52,28 @@ export const listFood = async (req, res) => {
   }
 };
 
+//get food by id
+export const getFoodById = async (req, res) => {
+  const foodId = req.params.id;
+  try {
+    const foodItem = await FoodModel.findById(foodId);
+    if (!foodItem) {
+      return res.status(404).json({
+        success: false,
+        message: "Food item not found",
+      });
+    }
+    return res.status(200).json({
+      success: true,
+      data: foodItem,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Server error, please try again later.",
+    });
+  }
+};
 //remove food items
 export const removeItems = async (req, res) => {
   try {

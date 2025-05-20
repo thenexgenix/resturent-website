@@ -3,6 +3,7 @@ import multer from "multer";
 import { body } from "express-validator";
 import {
   addFood,
+  getFoodById,
   listFood,
   removeItems,
 } from "../controllers/food.controller.js";
@@ -76,6 +77,9 @@ foodRouter.post(
 );
 //food router for list all the  food
 foodRouter.get("/listitem", listFood);
+
+//food router for get food by id
+foodRouter.get("/:id", getFoodById);
 //rood router for remove food items
-foodRouter.post("/remove/one", removeItems);
+foodRouter.post("/remove/:id", removeItems);
 export default foodRouter;
