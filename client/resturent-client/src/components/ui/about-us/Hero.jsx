@@ -1,17 +1,19 @@
-import React from 'react';
-import { motion } from 'motion/react';
+import React from "react";
+import { motion } from "motion/react";
+import SlideArrowButton from "./../../Button";
 
-const Hero= () => {
+const Hero = () => {
   return (
     <div className="relative h-screen">
       <div className="absolute inset-0 bg-black/60 z-10"></div>
-      <div 
+      <div
         className="absolute inset-0 bg-cover bg-center"
-        style={{ 
-          backgroundImage: "url('https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=1800')" 
+        style={{
+          backgroundImage:
+            "url('https://images.pexels.com/photos/1307698/pexels-photo-1307698.jpeg?auto=compress&cs=tinysrgb&w=1800')",
         }}
       />
-      
+
       <div className="relative z-20 h-full flex flex-col justify-center items-center text-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -23,7 +25,8 @@ const Hero= () => {
             Our Culinary Journey
           </h1>
           <p className="text-gray-200  text-lg md:text-xl mb-8 max-w-xl mx-auto">
-            Crafting memorable dining experiences since 2005, blending tradition with innovation.
+            Crafting memorable dining experiences since 2005, blending tradition
+            with innovation.
           </p>
           <motion.div
             initial={{ opacity: 0 }}
@@ -32,30 +35,30 @@ const Hero= () => {
           >
             <a
               href="#story"
-              className="px-8 py-3 bg-primary-700 text-white font-medium rounded-md hover:bg-primary-800 transition-colors inline-block"
+              className="px-8 py-3  text-white font-medium rounded-md hover:bg-primary-800 transition-colors inline-block"
             >
-              Discover Our Story
+              <SlideArrowButton text={"Discover Our Story"} />
             </a>
           </motion.div>
         </motion.div>
       </div>
-      
-      <motion.div 
+
+      <motion.div
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
-        animate={{ 
+        animate={{
           y: [0, 10, 0],
         }}
-        transition={{ 
+        transition={{
           repeat: Infinity,
           duration: 1.5,
-          ease: "easeInOut" 
+          ease: "easeInOut",
         }}
       >
-        <svg 
+        <svg
           className="w-6 h-6 text-white"
-          fill="none" 
-          strokeWidth="2" 
-          viewBox="0 0 24 24" 
+          fill="none"
+          strokeWidth="2"
+          viewBox="0 0 24 24"
           stroke="currentColor"
         >
           <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>

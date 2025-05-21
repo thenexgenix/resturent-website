@@ -2,24 +2,62 @@ import FoodModel from "../models/food.models.js";
 
 export const FoodService = async ({
   name,
-  description,
+  shortDescription,
+  detailsDescription,
   price,
-  image,
+  images,
   category,
+  starRating = 0,
+  ingredients = [],
+  calories,
+  isAvailable = true,
+  preparationTime,
+  origin = "Unknown",
+  tags = [],
 }) => {
   try {
-    if (!name || !description || !price || !image || !category) {
-      throw new Error("All fields are required");
+    // Required field validation
+    if (
+      !name ||
+      !shortDescription ||
+      !detailsDescription ||
+      !price ||
+      !images ||
+      !Array.isArray(images) ||
+      images.length === 0 ||
+      !category ||
+      !preparationTime
+    ) {
+      throw new Error("All required fields must be provided and valid");
     }
-    const createFood = FoodModel.create({
+
+    // Normalize input in case strings are passed
+    if (typeof ingredients === "string") {
+      ingredients = ingredients.split(",").map((i) => i.trim());
+    }
+
+    if (typeof tags === "string") {
+      tags = tags.split(",").map((t) => t.trim());
+    }
+
+    const createFood = await FoodModel.create({
       name,
-      description,
+      shortDescription,
+      detailsDescription,
       price,
-      image,
+      images,
       category,
+      starRating,
+      ingredients,
+      calories,
+      isAvailable,
+      preparationTime,
+      origin,
+      tags,
     });
+
     return createFood;
   } catch (error) {
-    throw new error(error.massage);
+    throw new Error(error.message || "Failed to create food item");
   }
 };
