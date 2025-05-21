@@ -1,0 +1,18 @@
+ {
+    id: 'kfsdajklfdsjfdsfdr23o04r324u3244234234',
+    name: 'Mediterranean Salad',
+    shortDescription: 'Fresh and healthy Mediterranean-style salad with feta cheese',
+    detailsDescription: 'A vibrant mix of fresh vegetables, olives, and feta cheese, dressed with extra virgin olive oil and Mediterranean herbs. Perfect for a light and healthy meal.',
+    price: 299,
+    images: ['https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg'],
+    category: 'Salad',
+    starRating: 4.8,
+    ingredients: ['Mixed Greens', 'Feta Cheese', 'Olives', 'Cherry Tomatoes', 'Cucumber', 'Red Onion'],
+    calories: 320,
+    isAvailable: true,
+    preparationTime: '10 mins',
+    origin: 'Mediterranean',
+    tags: ['Healthy', 'Vegetarian', 'Fresh'],
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  },

@@ -10,19 +10,44 @@ export const addFood = async (req, res) => {
     if (!error.isEmpty()) {
       return res.status(400).json({ success: false, massage: error.array() });
     }
-    const { name, description, price, image, category } = req.body;
+    const {
+      name,
+      shortDescription,
+      detailsDescription,
+      price,
+      images,
+      category,
+      starRating,
+      ingredients,
+      calories,
+      isAvailable,
+      preparationTime,
+      origin,
+      tags,
+    } = req.body;
     // create new food document
     await FoodService({
       name,
-      description,
+      shortDescription,
+      detailsDescription,
       price,
-      image,
+      images,
       category,
+      starRating,
+      ingredients,
+      calories,
+      isAvailable,
+      preparationTime,
+      origin,
+      tags,
+
     });
+
     return res
       .status(201)
       .json({ success: true, message: "Food item added successfully" });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({
       success: false,
       message: "Server error, please try again later.",

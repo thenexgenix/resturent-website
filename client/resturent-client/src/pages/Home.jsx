@@ -35,7 +35,7 @@ const heroImages = [
 
 const Home = () => {
   return (
-    <main className="w-full mt-20">
+    <main className="w-full ">
       <HeroSlider images={heroImages} />
       <section className="mt-8 md:px-[3%] lg:px-[4%] xl:px-[5%]">
         <ExploreMenu />

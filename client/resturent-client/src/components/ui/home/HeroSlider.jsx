@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import SlideArrowButton from "./../../Button";
 
 // Custom hook for gradual scaling effect
 const useGradualScale = (isActive, maxScale = 1.1, speed = 0.0005) => {
@@ -33,7 +34,7 @@ const HeroSlider = ({ images, autoSlide = true, intervalTime = 4000 }) => {
   const slideWidth = 100;
 
   return (
-    <section className="relative rounded-b-2xl overflow-hidden w-full h-[95vh]">
+    <section className="relative rounded-b-2xl overflow-hidden w-full h-[100vh]">
       {/* Slider Track */}
       <motion.div
         className="flex w-full h-full"
@@ -143,16 +144,16 @@ const HeroSlider = ({ images, autoSlide = true, intervalTime = 4000 }) => {
                 {/* Button */}
                 {isActive && currentIndex === 0 ? (
                   <motion.button
-                    className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition-all duration-300"
+                    
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }}
                   >
-                    {image.buttonText}
+                    <SlideArrowButton text={image.buttonText}/>
                   </motion.button>
                 ) : (
-                  <button className="px-8 py-4 bg-white text-black rounded-full font-semibold text-lg shadow-lg hover:bg-gray-100 transition-all duration-300">
-                    {image.buttonText}
+                  <button >
+                    <SlideArrowButton text={image.buttonText}/>
                   </button>
                 )}
               </div>

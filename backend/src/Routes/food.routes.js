@@ -47,17 +47,22 @@ const upload = multer({ storage, fileFilter });
 foodRouter.post(
   "/add",
   [
-    upload.single("image"),
+    upload.array("images", 3),
     body("name")
       .notEmpty()
       .withMessage("Food item name is required")
       .isLength({ min: 2 })
-      .withMessage("Food item Name must be at least 2 characters long"),
-    body("description")
+      .withMessage("Food item name must be at least 2 characters long"),
+    body("shortDescription")
       .notEmpty()
-      .withMessage("Food description is required")
+      .withMessage("Short description is required")
       .isLength({ min: 10 })
-      .withMessage("Description must be at least 10 characters long"),
+      .withMessage("Short description must be at least 10 characters long"),
+    body("detailsDescription")
+      .notEmpty()
+      .withMessage("Details description is required")
+      .isLength({ min: 10 })
+      .withMessage("Details description must be at least 10 characters long"),
     body("price")
       .notEmpty()
       .withMessage("Price is required")
@@ -67,9 +72,13 @@ foodRouter.post(
       .withMessage("Price must be at least 10"),
     body("category").notEmpty().withMessage("Category is required"),
   ],
+
   (req, res, next) => {
-    if (req.file) {
-      req.body.image = req.file.filename;
+    if (req.files && req.files.length > 0) {
+      req.body.images = req.files.map((file) => file.filename);
+      console.log(req.body.images);
+    } else {
+      req.body.images = [];
     }
     next();
   },
