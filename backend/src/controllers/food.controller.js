@@ -40,7 +40,6 @@ export const addFood = async (req, res) => {
       preparationTime,
       origin,
       tags,
-
     });
 
     return res
@@ -57,7 +56,15 @@ export const addFood = async (req, res) => {
 //list all food
 export const listFood = async (req, res) => {
   try {
-    const fooditemlist = await FoodModel.find({});
+    const { random } = req.query;
+    let fooditemlist;
+
+    if (random === "true") {
+      // Get 10 random items
+      fooditemlist = await FoodModel.aggregate([{ $sample: { size: 10 } }]);
+    } else {
+      fooditemlist = await FoodModel.find({});
+    }
     if (!fooditemlist || fooditemlist.length === 0) {
       return res.status(404).json({
         success: false,
@@ -70,6 +77,7 @@ export const listFood = async (req, res) => {
       data: fooditemlist,
     });
   } catch (error) {
+    console.error("Error fetching food items:", error);
     return res.status(500).json({
       success: false,
       message: "Server error, please try again later.",

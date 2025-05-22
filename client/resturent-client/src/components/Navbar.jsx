@@ -57,15 +57,20 @@ const Navbar = () => {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center md:gap-6 lg:gap-10 text-medium lg:text-xl">
-            {["Home", "About", "Menu", "Contact Us"].map((label, idx) => (
+            {[
+              { MenuName: "Home", path: "/", id: 1 },
+              { MenuName: "About", path: "/about", id: 2 },
+              { MenuName: "Menu", path: "/menu", id: 3 },
+              { MenuName: "Contact Us", path: "/contact", id: 4 },
+            ].map((label) => (
               <Link
-                key={idx}
-                to={`/${label.replace(/\s/g, "-").toLowerCase()}`}
+                key={label.id}
+                to={`${label?.path.replace(/\s/g, "-").toLowerCase()}`}
                 className={`relative transition-all duration-300 ease-in-out group ${
                   scrolled ? "text-navbar-text" : "text-white"
                 }`}
               >
-                {label}
+                {label?.MenuName}
                 <span
                   className={`absolute left-0 -bottom-1 h-0.5 bg-bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left`}
                   style={{ width: "100%" }}

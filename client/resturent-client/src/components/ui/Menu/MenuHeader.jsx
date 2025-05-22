@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 const MenuHeader = () => {
   return (
     <motion.div 
-      className="text-center mb-8"
+      className="text-center mb-8 border mt-2 md:mt-8 p-4 bg-white shadow-lg rounded-lg"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

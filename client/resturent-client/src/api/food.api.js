@@ -10,7 +10,7 @@ const foodApi = axios.create({
 });
 //all foods items
 export const getAllFoods = async () => {
-  const response = await foodApi.get("/foods/listitem");
+  const response = await foodApi.get("/foods/listitem?random=true");
   return response.data.data;
 };
 

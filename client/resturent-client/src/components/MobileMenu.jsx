@@ -30,7 +30,7 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
       initial="closed"
       animate={isOpen ? "open" : "closed"}
       variants={menuVariants}
-      className=" md:hidden fixed  top-0 right-0 h-screen w-full  bg-white shadow-lg py-6 px-8 flex flex-col z-[800]"
+      className=" md:hidden fixed  top-0 right-0 h-screen w-[60vw]  bg-white shadow-lg py-6 px-8 flex flex-col z-[800]"
     >
       <div className="flex justify-end items-center mb-8">
         <button
@@ -43,34 +43,25 @@ const MobileMenu = ({ isOpen, toggleMenu }) => {
       </div>
 
       <nav className="flex flex-col space-y-6 mb-8">
-        <Link
-          to="/"
-          onClick={toggleMenu}
-          className="text-navbar-text hover:text-navbar-hover transition-colors text-lg font-medium"
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          onClick={toggleMenu}
-          className="text-navbar-text hover:text-navbar-hover transition-colors text-lg font-medium"
-        >
-          About
-        </Link>
-        <Link
-          to="/mobile-app"
-          onClick={toggleMenu}
-          className="text-navbar-text hover:text-navbar-hover transition-colors text-lg font-medium"
-        >
-          Mobile App
-        </Link>
-        <Link
-          to="/contact"
-          onClick={toggleMenu}
-          className="text-navbar-text hover:text-navbar-hover transition-colors text-lg font-medium"
-        >
-          Contact Us
-        </Link>
+        {[
+          { MenuName: "Home", path: "/", id: 1 },
+          { MenuName: "About", path: "/about", id: 2 },
+          { MenuName: "Menu", path: "/menu", id: 3 },
+          { MenuName: "Contact Us", path: "/contact", id: 4 },
+        ].map((label) => (
+          <Link
+            key={label.id}
+            to={`${label?.path.replace(/\s/g, "-").toLowerCase()}`}
+            className={`relative transition-all duration-300 ease-in-out group `}
+          >
+            {label?.MenuName}
+            <span
+              className={`absolute left-0 -bottom-1 h-0.5 bg-bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-in-out origin-left`}
+              style={{ width: "100%" }}
+            ></span>
+          </Link>
+        ))}
+
         <Link to="/login">
           <button className="border bg-[#FF4C24] hover:bg-[#ff4c24e7] active:scale-95 transition-all ease-linear text-white  hover:bg-opacity-90  font-medium py-2 px-4 rounded  duration-150">
             Login

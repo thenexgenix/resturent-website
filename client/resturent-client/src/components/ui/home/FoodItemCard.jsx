@@ -53,7 +53,7 @@ const FoodItemCard = ({ item, index }) => {
       <div className="p-4 flex flex-col flex-grow">
         <div className="flex items-center justify-between mb-2">
           <Link to={`/menu/${item._id}`} className="text-gray-800">
-            <h3 className="text-lg font-bold text-gray-800">{item.name}</h3>
+            <h3 className="active:text-bg-primary hover:text-bg-primary transition-colors duration-200 ease-linear  text-lg font-bold text-gray-800">{item.name}</h3>
           </Link>
           <span className="text-xl font-bold text-red-600">৳{item.price}</span>
         </div>
