@@ -14,17 +14,17 @@ const Hero = () => {
         }}
       />
 
-      <div className="relative z-20 h-full flex flex-col justify-center items-center text-center px-4">
+      <div className="relative italic z-20 h-full flex flex-col justify-center items-center text-center px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="max-w-3xl mx-auto"
         >
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+          <h1 className=" text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             Our Culinary Journey
           </h1>
-          <p className="text-gray-200  text-lg md:text-xl mb-8 max-w-xl mx-auto">
+          <p className="text-gray-200   text-lg md:text-xl mb-8 max-w-xl mx-auto">
             Crafting memorable dining experiences since 2005, blending tradition
             with innovation.
           </p>

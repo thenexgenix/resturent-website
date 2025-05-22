@@ -1,12 +1,12 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FaUtensils } from "react-icons/fa";
 import SlideArrowButton from "../../Button";
 import MenuHeroImage from "../../../assets/frontend_assets/menu-page-hero-image.png";
 
 const MenuHero = () => {
   return (
-    <div className="relative h-screen w-full text-white overflow-hidden">
+    <div className="relative h-[80vh] w-full text-white overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img
@@ -30,11 +30,11 @@ const MenuHero = () => {
             <div className="p-2 bg-[#F90806] rounded-full text-4xl">
               <FaUtensils className="text-white drop-shadow-lg" />
             </div>
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-xl">
+            <h1 className="text-4xl italic md:text-6xl font-extrabold tracking-tight leading-tight drop-shadow-xl">
               Taste the Difference
             </h1>
           </div>
-          <p className="text-lg md:text-xl text-gray-200 max-w-2xl leading-relaxed drop-shadow-lg">
+          <p className="text-lg italic md:text-xl text-gray-200 max-w-2xl leading-relaxed drop-shadow-lg">
             Explore an exquisite variety of gourmet meals crafted for your
             unique taste. From traditional favorites to bold new flavors —
             there’s something delicious waiting for everyone.
@@ -54,7 +54,7 @@ const MenuHero = () => {
           <img
             src={MenuHeroImage}
             alt="Menu Showcase"
-            className="w-60 md:w-80 lg:w-96 object-contain"
+            className="w-60 md:w-80 lg:w-96 xl:w-8/12 object-contain"
           />
         </motion.div>
       </motion.div>

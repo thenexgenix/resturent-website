@@ -1,14 +1,14 @@
-import React from 'react';
-import MenuHeader from './MenuHeader';
-import MenuHero from './MenuHero';
+import React from "react";
+import MenuHeader from "./MenuHeader";
+import MenuHero from "./MenuHero";
 
 const MenuPageUi = () => {
-    return (
-        <div>
-            <MenuHero/>
-           <MenuHeader/>
-        </div>
-    );
+  return (
+    <div>
+      <MenuHero />
+      <MenuHeader />
+    </div>
+  );
 };
 
 export default MenuPageUi;

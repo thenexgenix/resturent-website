@@ -46,7 +46,7 @@ const Navbar = () => {
         } backdrop-blur-lg transition-all duration-300`}
       >
         <div className="container mx-auto px-4 md:px-0 py-4 flex items-center justify-between">
-          <Link to="/" className="flex-shrink-0">
+          <Link to="/" className="flex-shrink-0 italic">
             <h2
               className={`text-4xl font-bold  text-bg-primary
               `}
@@ -56,7 +56,7 @@ const Navbar = () => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center md:gap-6 lg:gap-10 text-medium lg:text-xl">
+          <nav className=" italic hidden md:flex items-center md:gap-6 lg:gap-10 text-medium lg:text-xl">
             {[
               { MenuName: "Home", path: "/", id: 1 },
               { MenuName: "About", path: "/about", id: 2 },
@@ -81,12 +81,11 @@ const Navbar = () => {
 
           {/* Desktop Icons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button className={iconColor} aria-label="Search">
-              <FaSearch size={20} />
-            </button>
-            <button className={iconColor} aria-label="Cart">
-              <FaCartArrowDown size={20} />
-            </button>
+            <Link to={"/cart"} className="hover:scale-95 active:scale-95 transition-all duration-300">
+              <button className={iconColor} aria-label="Cart">
+                <FaCartArrowDown size={30} />
+              </button>
+            </Link>
             <Link to="/login">
               <button className="border bg-bg-primary hover:bg-[#ff4c24e7] active:scale-95 transition-all ease-linear text-white hover:bg-opacity-90 font-medium py-2 px-4 rounded duration-150">
                 Login
